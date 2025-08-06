@@ -2,19 +2,41 @@ import { formatDate } from "@/lib/utils";
 import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 import { MessageSeenSvg } from "@/lib/svgs";
 import { ImageIcon, Users, VideoIcon } from "lucide-react";
-import { useQuery } from "convex/react";
-import { api } from "../../../convex/_generated/api";
-import { useConversationStore } from "@/store/chat-store";
 
-const Conversation = ({ conversation }: { conversation: any }) => {
+interface ConversationType {
+	_id: string;
+	groupImage?: string;
+	image?: string;
+	groupName?: string;
+	name?: string;
+	lastMessage?: {
+		messageType: string;
+		content: string;
+		sender: string;
+		_creationTime: number;
+	};
+	isOnline?: boolean;
+	isGroup?: boolean;
+	_creationTime: number;
+}
+
+const Conversation = ({ conversation }: { conversation: ConversationType }) => {
 	const conversationImage = conversation.groupImage || conversation.image;
 	const conversationName = conversation.groupName || conversation.name;
 	const lastMessage = conversation.lastMessage;
 	const lastMessageType = lastMessage?.messageType;
-	const me = useQuery(api.users.getMe);
+	// Temporary dummy user - replace with actual user management later
+	const me = { _id: "dummy-user-id" };
 
-	const { setSelectedConversation, selectedConversation } = useConversationStore();
-	const activeBgClass = selectedConversation?._id === conversation._id;
+	// Temporary state management - replace with actual store later
+	const selectedConversation: ConversationType | null = null;
+	const setSelectedConversation = (conv: ConversationType) => {
+		console.log("Selected conversation:", conv);
+		// TODO: Implement actual conversation selection
+	};
+	
+	// Since selectedConversation is always null for now, activeBgClass will always be false
+	const activeBgClass = false;
 
 	return (
 		<>
@@ -44,11 +66,11 @@ const Conversation = ({ conversation }: { conversation: any }) => {
 						{lastMessage?.sender === me?._id ? <MessageSeenSvg /> : ""}
 						{conversation.isGroup && <Users size={16} />}
 						{!lastMessage && "Say Hi!"}
-						{lastMessageType === "text" ? (
-							lastMessage?.content.length > 30 ? (
-								<span>{lastMessage?.content.slice(0, 30)}...</span>
+						{lastMessageType === "text" && lastMessage?.content ? (
+							lastMessage.content.length > 30 ? (
+								<span>{lastMessage.content.slice(0, 30)}...</span>
 							) : (
-								<span>{lastMessage?.content}</span>
+								<span>{lastMessage.content}</span>
 							)
 						) : null}
 						{lastMessageType === "image" && <ImageIcon size={16} />}
