@@ -1,0 +1,12 @@
+{
+  "project": {
+    "name": "aiim",
+    "schemaPath": "convex/schema.ts"
+  },
+  "functions": {
+    "codegen": {
+      "enabled": true,
+      "path": "convex/_generated"
+    }
+  }
+} 
