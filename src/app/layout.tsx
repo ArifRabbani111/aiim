@@ -33,12 +33,12 @@ export default function RootLayout({
   return (
     <ClerkProvider>
       <html lang="en">
-        <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
-          <header className="flex justify-end items-center p-4 gap-4 h-16">
+        <body className={`${geistSans.variable} ${geistMono.variable} antialiased bg-cover bg-center bg-no-repeat`} style={{backgroundImage: 'url("/AIIM.jpg")'}}>
+          <header className="flex justify-end items-center p-4 gap-4 h-16 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md rounded-lg mx-5 mt-5 shadow-lg border border-gray-200/30 dark:border-gray-700/30">
             <SignedOut>
               <SignInButton />
               <SignUpButton>
-                <button className="bg-[#6c47ff] text-ceramic-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer">
+                <button className="bg-[#6c47ff] hover:bg-[#5a3fd8] text-white rounded-full font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 cursor-pointer transition-colors shadow-md">
                   Sign Up
                 </button>
               </SignUpButton>
@@ -47,7 +47,7 @@ export default function RootLayout({
               <UserButton />
             </SignedIn>
           </header>
-          
+          {children}
         </body>
       </html>
     </ClerkProvider>

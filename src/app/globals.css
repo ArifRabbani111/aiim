@@ -120,3 +120,43 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Custom background image styling */
+body {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+/* Ensure better component visibility */
+.bg-left-panel {
+  background-color: rgba(255, 255, 255, 0.95);
+}
+
+.dark .bg-left-panel {
+  background-color: rgba(17, 24, 39, 0.95);
+}
+
+/* Improve text contrast */
+.text-gray-500 {
+  color: rgb(107 114 128);
+}
+
+.dark .text-gray-500 {
+  color: rgb(156 163 175);
+}
+
+/* Add a subtle overlay to improve content readability */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: -1;
+  pointer-events: none;
+}
